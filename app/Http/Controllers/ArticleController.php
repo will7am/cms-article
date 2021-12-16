@@ -59,8 +59,8 @@ class ArticleController extends Controller
 
             $request->file('image')->store('article_images');
             $article = new Article;
-            $article->title = $request->get('title');
-            $article->body = $request->get('body');
+            $article->title = htmlspecialchars($request->get('title'));
+            $article->body = htmlspecialchars($request->get('body'));
             $article->image = $request->file('image')->hashName();
             $article->save();
         }
@@ -102,7 +102,24 @@ class ArticleController extends Controller
     public function update(Request $request, $id)
     {
         $article = Article::findOrFail($id);
-        $this->save($request, $article);
+        $request->validate([
+            'title' => 'required|max:255',
+            'body' => 'required|max:255',
+            'image' => 'required',
+
+        ]);
+
+        if ($request->hasFile('image')) {
+            $request->validate([
+                'image' => 'mimes:jpg,jpeg,gif,bmp,png'
+            ]);
+
+            $request->file('image')->store('article_images');
+            $article->title = htmlspecialchars($request->get('title'));
+            $article->body = htmlspecialchars($request->get('body'));
+            $article->image = $request->file('image')->hashName();
+            $article->save();
+        }
         return redirect('/articles');
     }
 
