@@ -13,19 +13,21 @@ use App\Http\Controllers\ArticleController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',[ArticleController::class,'index']);
-
-
-Route::get('/articles',[ArticleController::class,'index']);
-Route::get('/list',[ArticleController::class,'list']);
-Route::get('/articles/create',[ArticleController::class,'create']);
-Route::post('/articles',[ArticleController::class,'store']);
-Route::put('/articles/{article}', [ArticleController::class, 'update']);
-Route::get('/articles/{article}', [ArticleController::class, 'show']);
-Route::get('/articles/{article}/edit', [ArticleController::class, 'edit']);
-Route::delete('/articles/{article}',[ArticleController::class,'destroy']);
-
-
 Auth::routes();
+Route::get('/',[ArticleController::class,'index']);
+Route::get('/articles',[ArticleController::class,'index']);
 
+//For JSON response return all results
+Route::get('/list',[ArticleController::class,'list']);
+
+Route::get('/articles/create',[ArticleController::class,'create'])->middleware('admin');
+Route::post('/articles',[ArticleController::class,'store']);
+Route::put('/articles/{article}', [ArticleController::class, 'update'])->middleware('admin');
+Route::get('/articles/{article}', [ArticleController::class, 'show']);
+
+//For JSON response return a specific result
+Route::get('/show_articles/{article}', [ArticleController::class, 'show_article']);
+
+Route::get('/articles/{article}/edit', [ArticleController::class, 'edit'])->middleware('admin');
+Route::delete('/articles/{article}',[ArticleController::class,'destroy'])->middleware('admin');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

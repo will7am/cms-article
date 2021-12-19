@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use GuzzleHttp\Message\Response;
@@ -62,6 +63,7 @@ class ArticleController extends Controller
             $article->title = htmlspecialchars($request->get('title'));
             $article->body = htmlspecialchars($request->get('body'));
             $article->image = $request->file('image')->hashName();
+            $article->user_id = auth()->user()->id;
             $article->save();
         }
 
@@ -77,6 +79,14 @@ class ArticleController extends Controller
     public function show($id)
     {
         $article = Article::findOrFail($id);
+        //return response()->json($article);
+        return view('article.show',['article'=>$article]);
+    }
+
+    //This function is to return JSON response
+    public function show_article($id)
+    {
+        $article = Article::findOrFail($id);
         return response()->json($article);
     }
 
@@ -89,7 +99,8 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $article = Article::findOrFail($id);
-        return response()->json($article);
+        //return response()->json($article);
+        return view('article.edit',['article'=>$article]);
     }
 
     /**

@@ -1,0 +1,8 @@
+.icon_gray {
+    opacity: 0.7;
+    height: 22px;
+    width: 22px;
+}
+.icon_gray:hover{
+    opacity:1;
+}
