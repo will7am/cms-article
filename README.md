@@ -6,3 +6,4 @@
 <p>5. Please check the auth system of normal user/visitor and admin user, visitor and normal user could not see create, update and delete options, and will be redirected even if they entered the right urls.</p>
 <p>6. By default, users can only register as 'user', and have to alter the user role to 'admin' from the database, which reflects the real environment.</p>
 <p>7. Once admin users logged in, they can create, edit and records will be saved to the database, and when being shown, author(admin names) will be displayed under title. </p>
+<p>8. The whole project is using Bootstrap 5, use npm commands when necessary.</p>
