@@ -1,3 +1,4 @@
+<h3>Brief instructions</h3>
 <p>1. Article cms test, including blades and JSON API response.</p>
 <p>2. Create a 'cms_article'mysql database before running, set user name: 'root', password: 'root'.</p>
 <p>3. Website now is using normal rest api to run.</p>
