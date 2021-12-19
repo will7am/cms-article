@@ -1,4 +1,4 @@
-1.Article cms test, including blades and JSON API response.
+1.<p>Article cms test, including blades and JSON API response.</p>
 2.Create a 'cms_article'mysql database before running, set user name: 'root', password: 'root'
 3.Website now is using normal rest api to run.
 4.In the ArticleController and route file, included 'list' to access JSON response of all results and 'show_articles/{article}' to show a specific record.
